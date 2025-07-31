@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Madrid - Notas de Jugadores</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style-drag-drop.css">
+    <link rel="stylesheet" href="style-forms.css">
+    <link rel="stylesheet" href="style-competitions.css">
+    <link rel="stylesheet" href="style-statistics.css">
+    <link rel="stylesheet" href="style-plantilla.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header con logo y título -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <h1 class="app-title">Real Madrid</h1>
+                <p class="app-subtitle">Notas de Jugadores</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navegación principal -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <button class="nav-tab active" data-tab="crear-partido">
+                <span class="nav-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M12 6v6l4 2"/>
+                    </svg>
+                </span>
+                <span class="nav-text">Crear Partido</span>
+            </button>
+            <button class="nav-tab" data-tab="estadisticas">
+                <span class="nav-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 3v18h18"/>
+                        <path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"/>
+                    </svg>
+                </span>
+                <span class="nav-text">Estadísticas</span>
+            </button>
+            <button class="nav-tab" data-tab="plantilla">
+                <span class="nav-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                </span>
+                <span class="nav-text">Plantilla</span>
+            </button>
+            <button class="nav-tab" data-tab="historial">
+                <span class="nav-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                        <polyline points="14,2 14,8 20,8"/>
+                        <line x1="16" y1="13" x2="8" y2="13"/>
+                        <line x1="16" y1="17" x2="8" y2="17"/>
+                        <polyline points="10,9 9,9 8,9"/>
+                    </svg>
+                </span>
+                <span class="nav-text">Historial</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <main class="main-content">
+        <!-- Pestaña: Crear Partido -->
+        <section id="crear-partido" class="tab-content active">
+            <div class="content-container">
+                <h2 class="section-title">Crear Nuevo Partido</h2>
+                
+                <!-- Formulario de datos del partido -->
+                <div class="form-card" id="form-partido">
+                    <h3 class="form-title">Datos del Partido</h3>
+                    <form id="partido-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="rival">Equipo Rival</label>
+                                <input type="text" id="rival" name="rival" placeholder="Ej: FC Barcelona" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="fecha">Fecha del Partido</label>
+                                <input type="date" id="fecha" name="fecha" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="competicion">Competición</label>
+                                <div class="select-container">
+                                    <select id="competicion" name="competicion" required>
+                                        <option value="">Seleccionar competición</option>
+                                    </select>
+                                    <button type="button" class="add-competition-btn" id="add-competition" title="Añadir nueva competición">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M12 5v14m-7-7h14"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Ubicación del Partido</label>
+                                <div class="ubicacion-toggle">
+                                    <input type="radio" id="ubicacion-local" name="ubicacion" value="local" checked>
+                                    <label for="ubicacion-local" class="ubicacion-option">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                                            <polyline points="9,22 9,12 15,12 15,22"/>
+                                        </svg>
+                                        <span>Local</span>
+                                    </label>
+                                    <input type="radio" id="ubicacion-visitante" name="ubicacion" value="visitante">
+                                    <label for="ubicacion-visitante" class="ubicacion-option">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                            <circle cx="12" cy="10" r="3"/>
+                                        </svg>
+                                        <span>Visitante</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="goles-madrid">Goles Real Madrid</label>
+                                <div class="number-input">
+                                    <button type="button" class="number-btn minus" data-target="goles-madrid">-</button>
+                                    <input type="number" id="goles-madrid" name="goles-madrid" min="0" max="20" value="0" required>
+                                    <button type="button" class="number-btn plus" data-target="goles-madrid">+</button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="goles-rival">Goles Rival</label>
+                                <div class="number-input">
+                                    <button type="button" class="number-btn minus" data-target="goles-rival">-</button>
+                                    <input type="number" id="goles-rival" name="goles-rival" min="0" max="20" value="0" required>
+                                    <button type="button" class="number-btn plus" data-target="goles-rival">+</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="escudo-rival">Escudo del Rival</label>
+                            <div class="file-upload-container">
+                                <input type="file" id="escudo-rival" name="escudo-rival" accept="image/*" class="file-input">
+                                <label for="escudo-rival" class="file-upload-label">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                        <polyline points="7,10 12,15 17,10"/>
+                                        <line x1="12" y1="15" x2="12" y2="3"/>
+                                    </svg>
+                                    <span class="file-upload-text">Seleccionar imagen del escudo</span>
+                                </label>
+                                <div class="file-preview" id="escudo-preview" style="display: none;">
+                                    <img id="escudo-preview-img" src="" alt="Vista previa del escudo">
+                                    <button type="button" class="remove-file-btn" id="remove-escudo">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <line x1="18" y1="6" x2="6" y2="18"/>
+                                            <line x1="6" y1="6" x2="18" y2="18"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <small class="form-help">Sube una imagen del escudo del equipo rival (opcional)</small>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="button" class="btn-primary btn-large" id="siguiente-jugadores">
+                                <span>Siguiente: Seleccionar Jugadores</span>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M5 12h14m-7-7 7 7-7 7"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Pantalla de selección de jugadores -->
+                <div class="form-card hidden" id="seleccion-jugadores">
+                    <h3 class="form-title">Seleccionar Jugadores</h3>
+                    <p class="form-description">Arrastra los jugadores titulares al campo de fútbol y selecciona los suplentes que jugaron.</p>
+                    
+                    <div class="jugadores-layout">
+                        <!-- Selector de formación -->
+                        <div class="formacion-selector">
+                            <h4>Seleccionar Formación</h4>
+                            <div class="formaciones-grid">
+                                <button type="button" class="formacion-btn" data-formacion="4-3-3">4-3-3</button>
+                                <button type="button" class="formacion-btn" data-formacion="4-4-2">4-4-2</button>
+                                <button type="button" class="formacion-btn" data-formacion="3-5-2">3-5-2</button>
+                                <button type="button" class="formacion-btn" data-formacion="4-2-3-1">4-2-3-1</button>
+                                <button type="button" class="formacion-btn" data-formacion="3-4-3">3-4-3</button>
+                                <button type="button" class="formacion-btn" data-formacion="5-3-2">5-3-2</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Campo de fútbol -->
+                        <div class="campo-container">
+                            <div class="campo-futbol">
+                                <div class="campo-background">
+                                    <div class="campo-lineas">
+                                        <!-- Líneas del campo -->
+                                        <div class="linea-central"></div>
+                                        <div class="circulo-central"></div>
+                                        <div class="area-grande area-arriba"></div>
+                                        <div class="area-pequena area-arriba"></div>
+                                        <div class="area-grande area-abajo"></div>
+                                        <div class="area-pequena area-abajo"></div>
+                                    </div>
+                                    <!-- Posiciones para jugadores -->
+                                    <div class="posiciones-campo" id="posiciones-campo">
+                                        <!-- Se llenarán dinámicamente -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Lista de jugadores disponibles -->
+                        <div class="jugadores-disponibles">
+                            <h4>Jugadores Disponibles</h4>
+                            <div class="jugadores-grid" id="jugadores-disponibles">
+                                <!-- Se llenarán dinámicamente -->
+                            </div>
+                            
+                            <h4>Suplentes que Jugaron</h4>
+                            <div class="suplentes-list" id="suplentes-list">
+                                <!-- Se llenarán dinámicamente -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" id="volver-datos">Volver</button>
+                        <button type="button" class="btn-primary" id="siguiente-calificacion">
+                            Siguiente: Calificar Jugadores
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Pantalla de calificación -->
+                <div class="form-card hidden" id="calificacion-jugadores">
+                    <h3 class="form-title">Calificar Jugadores</h3>
+                    <p class="form-description">Asigna una nota del 0 al 10 y un comentario opcional a cada jugador.</p>
+                    
+                    <div class="calificaciones-container" id="calificaciones-container">
+                        <!-- Se llenarán dinámicamente -->
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" id="volver-jugadores">Volver</button>
+                        <button type="button" class="btn-primary" id="guardar-partido">
+                            Guardar Partido y Calificaciones
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pestaña: Estadísticas -->
+        <section id="estadisticas" class="tab-content">
+            <div class="content-container">
+                <h2 class="section-title">Análisis y Estadísticas</h2>
+                
+                <!-- Métricas principales -->
+                <div class="metrics-overview">
+                    <div class="metric-card highlight">
+                        <div class="metric-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <path d="m22 21-3-3m0 0a5.5 5.5 0 1 0-7.78-7.78 5.5 5.5 0 0 0 7.78 7.78Z"/>
+                            </svg>
+                        </div>
+                        <div class="metric-content">
+                            <div class="metric-value" id="total-players">0</div>
+                            <div class="metric-label">Jugadores Activos</div>
+                        </div>
+                    </div>
+                    
+                    <div class="metric-card highlight">
+                        <div class="metric-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect width="18" height="18" x="3" y="4" rx="2" ry="2"/>
+                                <line x1="16" x2="16" y1="2" y2="6"/>
+                                <line x1="8" x2="8" y1="2" y2="6"/>
+                                <line x1="3" x2="21" y1="10" y2="10"/>
+                            </svg>
+                        </div>
+                        <div class="metric-content">
+                            <div class="metric-value" id="total-matches">0</div>
+                            <div class="metric-label">Partidos Registrados</div>
+                        </div>
+                    </div>
+                    
+                    <div class="metric-card highlight">
+                        <div class="metric-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/>
+                            </svg>
+                        </div>
+                        <div class="metric-content">
+                            <div class="metric-value" id="avg-rating">0.0</div>
+                            <div class="metric-label">Nota Media del Equipo</div>
+                        </div>
+                    </div>
+                    
+                    <div class="metric-card highlight">
+                        <div class="metric-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M3 3v18h18"/>
+                                <path d="m19 9-5 5-4-4-3 3"/>
+                            </svg>
+                        </div>
+                        <div class="metric-content">
+                            <div class="metric-value" id="best-player">-</div>
+                            <div class="metric-label">Mejor Jugador</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Controles de análisis -->
+                <div class="analysis-controls">
+                    <div class="controls-grid">
+                        <div class="control-group">
+                            <label for="analysis-type">Tipo de Análisis</label>
+                            <select id="analysis-type" class="modern-select">
+                                <option value="overview">Resumen General</option>
+                                <option value="individual">Análisis Individual</option>
+                                <option value="comparison">Comparar Jugadores</option>
+                                <option value="competition">Por Competición</option>
+                                <option value="evolution">Evolución Temporal</option>
+                            </select>
+                        </div>
+                        
+                        <div class="control-group hidden" id="player-control">
+                            <label for="selected-player">Jugador</label>
+                            <select id="selected-player" class="modern-select">
+                                <option value="">Seleccionar jugador</option>
+                            </select>
+                        </div>
+                        
+                        <div class="control-group hidden" id="comparison-controls">
+                            <div class="comparison-selectors">
+                                <div class="comparison-player">
+                                    <label for="player1">Primer Jugador</label>
+                                    <select id="player1" class="modern-select">
+                                        <option value="">Seleccionar jugador</option>
+                                    </select>
+                                </div>
+                                <div class="vs-divider">VS</div>
+                                <div class="comparison-player">
+                                    <label for="player2">Segundo Jugador</label>
+                                    <select id="player2" class="modern-select">
+                                        <option value="">Seleccionar jugador</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="control-group hidden" id="competition-control">
+                            <label for="selected-competition">Competición</label>
+                            <select id="selected-competition" class="modern-select">
+                                <option value="">Todas las competiciones</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Área de visualización -->
+                <div class="visualization-container">
+                    <div class="charts-section">
+                        <div class="chart-card" id="main-chart">
+                            <div class="chart-header">
+                                <h3 class="chart-title" id="chart-title">Estadísticas Generales</h3>
+                                <div class="chart-controls">
+                                    <button class="chart-btn active" data-chart="bar">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <line x1="12" y1="20" x2="12" y2="10"/>
+                                            <line x1="18" y1="20" x2="18" y2="4"/>
+                                            <line x1="6" y1="20" x2="6" y2="16"/>
+                                        </svg>
+                                    </button>
+                                    <button class="chart-btn" data-chart="line">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="22,6 13.5,15.5 8.5,10.5 2,17"/>
+                                            <polyline points="16,6 22,6 22,12"/>
+                                        </svg>
+                                    </button>
+                                    <button class="chart-btn" data-chart="radar">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polygon points="12,2 22,8.5 22,15.5 12,22 2,15.5 2,8.5"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="chart-content" id="chart-content">
+                                <!-- Gráfico principal -->
+                            </div>
+                        </div>
+                        
+                        <div class="chart-card" id="secondary-chart">
+                            <div class="chart-header">
+                                <h3 class="chart-title" id="secondary-chart-title">Distribución</h3>
+                            </div>
+                            <div class="chart-content" id="secondary-chart-content">
+                                <!-- Gráfico secundario -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="insights-section">
+                        <div class="insights-card">
+                            <h3 class="insights-title">Insights y Análisis</h3>
+                            <div class="insights-content" id="insights-content">
+                                <div class="insight-item">
+                                    <div class="insight-icon">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M9 11H5a2 2 0 0 0-2 2v3c0 1.1.9 2 2 2h4m0-6v6m0-6V9a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m-6 0h6m0 0v6a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2v-3"/>
+                                        </svg>
+                                    </div>
+                                    <div class="insight-text">
+                                        <p>Selecciona un tipo de análisis para ver estadísticas detalladas y obtener insights sobre el rendimiento del equipo.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="rankings-card">
+                            <h3 class="rankings-title">Rankings</h3>
+                            <div class="rankings-content" id="rankings-content">
+                                <!-- Rankings se mostrarán aquí -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pestaña: Plantilla -->
+        <section id="plantilla" class="tab-content">
+            <div class="content-container">
+                <h2 class="section-title">Plantilla del Real Madrid</h2>
+                
+                <!-- Botón para añadir jugador -->
+                <div class="plantilla-header">
+                    <button class="btn-primary" id="add-player-btn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="m22 21-3-3m0 0a5.5 5.5 0 1 0-7.78-7.78 5.5 5.5 0 0 0 7.78 7.78Z"/>
+                        </svg>
+                        <span>Añadir Jugador</span>
+                    </button>
+                </div>
+                
+                <div class="plantilla-grid" id="plantilla-grid">
+                    <!-- Jugadores se mostrarán aquí -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Pestaña: Historial -->
+        <section id="historial" class="tab-content">
+            <div class="content-container">
+                <h2 class="section-title">Historial de Partidos</h2>
+                <div class="historial-container" id="historial-container">
+                    <!-- Lista de partidos se mostrará aquí -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal para añadir nueva competición -->
+    <div class="modal hidden" id="modal-competicion">
+        <div class="modal-content">
+            <h3>Añadir Nueva Competición</h3>
+            <input type="text" id="nueva-competicion" placeholder="Nombre de la competición">
+            <div class="modal-actions">
+                <button type="button" class="btn-secondary" id="cancelar-competicion">Cancelar</button>
+                <button type="button" class="btn-primary" id="guardar-competicion">Guardar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para añadir jugador -->
+    <div class="modal hidden" id="modal-add-player">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Añadir Nuevo Jugador</h3>
+                <button class="modal-close" id="close-add-player-modal">&times;</button>
+            </div>
+            <form id="add-player-form">
+                <div class="form-group">
+                    <label for="player-name">Nombre del Jugador</label>
+                    <input type="text" id="player-name" placeholder="Ej: Karim Benzema" required>
+                </div>
+                <div class="form-group">
+                    <label for="player-photo">Foto del Jugador</label>
+                    <div class="file-upload-container">
+                        <input type="file" id="player-photo" accept="image/*" class="file-input">
+                        <label for="player-photo" class="file-upload-label">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                <polyline points="7,10 12,15 17,10"/>
+                                <line x1="12" y1="15" x2="12" y2="3"/>
+                            </svg>
+                            <span class="file-upload-text">Seleccionar foto del jugador</span>
+                        </label>
+                        <div class="file-preview" id="player-photo-preview" style="display: none;">
+                            <img id="player-photo-preview-img" src="" alt="Vista previa de la foto">
+                            <button type="button" class="remove-file-btn" id="remove-player-photo">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="18" y1="6" x2="6" y2="18"/>
+                                    <line x1="6" y1="6" x2="18" y2="18"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <small class="form-help">Sube una foto del jugador (opcional)</small>
+                </div>
+            </form>
+            <div class="modal-actions">
+                <button type="button" class="btn-secondary" id="cancel-add-player">Cancelar</button>
+                <button type="button" class="btn-primary" id="save-add-player">Guardar Jugador</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para detalles del partido -->
+    <div class="modal hidden" id="modal-partido-detalle">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h3 id="partido-detalle-titulo">Detalles del Partido</h3>
+                <button class="modal-close" id="cerrar-partido-detalle">&times;</button>
+            </div>
+            <div class="modal-body" id="partido-detalle-contenido">
+                <!-- Contenido del partido se mostrará aquí -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para estadísticas de jugador -->
+    <div class="modal hidden player-stats-modal" id="modal-player-stats">
+        <div class="modal-content">
+            <div class="player-stats-header">
+                <img id="player-stats-photo" src="" alt="" class="player-stats-photo">
+                <div class="player-stats-info">
+                    <h3 id="player-stats-name">Nombre del Jugador</h3>
+                    <button class="modal-close notification-close" id="close-player-stats">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="player-stats-summary" id="player-stats-summary">
+                <!-- Estadísticas resumen se mostrarán aquí -->
+            </div>
+            
+            <div class="player-matches-section">
+                <h4 style="margin-bottom: 1rem; color: var(--color-gray-700);">Historial de Partidos</h4>
+                <div class="player-matches-list" id="player-matches-list">
+                    <!-- Lista de partidos del jugador -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para añadir competición -->
+    <div class="modal hidden" id="modal-add-competition">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Añadir Nueva Competición</h3>
+                <button class="modal-close" id="close-add-competition">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="form-add-competition">
+                    <div class="form-group">
+                        <label for="competition-name">Nombre de la Competición</label>
+                        <input type="text" id="competition-name" name="competition-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="competition-logo">Logo de la Competición</label>
+                        <input type="file" id="competition-logo" name="competition-logo" accept="image/*">
+                        <small>Sube una imagen del logo de la competición (opcional)</small>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" id="cancel-add-competition">Cancelar</button>
+                        <button type="submit" class="btn-primary">Añadir Competición</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="firebase-config.js"></script>
+    <script src="jugadores-data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
+

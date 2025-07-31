@@ -1,0 +1,292 @@
+/* ===== ESTILOS SELECTOR COMPETICIONES ===== */
+
+/* Select personalizado */
+.custom-select {
+    position: relative;
+    width: 100%;
+}
+
+.custom-select-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-md);
+    border: 2px solid var(--color-gray-200);
+    border-radius: var(--border-radius);
+    background: var(--color-white);
+    cursor: pointer;
+    transition: var(--transition);
+    min-height: 44px;
+}
+
+.custom-select-trigger:hover {
+    border-color: var(--color-gray-300);
+}
+
+.custom-select.open .custom-select-trigger {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.1);
+}
+
+.custom-select-text {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-size: var(--font-size-base);
+    color: var(--color-gray-700);
+    flex: 1;
+}
+
+.custom-select-arrow {
+    color: var(--color-gray-400);
+    transition: var(--transition);
+}
+
+.custom-select.open .custom-select-arrow {
+    transform: rotate(180deg);
+    color: var(--color-accent);
+}
+
+/* Opciones del dropdown */
+.custom-select-options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--color-white);
+    border: 2px solid var(--color-accent);
+    border-top: none;
+    border-radius: 0 0 var(--border-radius) var(--border-radius);
+    box-shadow: var(--shadow-lg);
+    z-index: 1000;
+    max-height: 300px;
+    overflow-y: auto;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: var(--transition);
+}
+
+.custom-select.open .custom-select-options {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.custom-select-option {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+    cursor: pointer;
+    transition: var(--transition);
+    border-bottom: var(--border-width) solid var(--color-gray-100);
+}
+
+.custom-select-option:last-child {
+    border-bottom: none;
+}
+
+.custom-select-option:hover {
+    background: var(--color-gray-50);
+    color: var(--color-accent);
+}
+
+/* Logos de competiciones */
+.competition-logo {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+.custom-select-text .competition-logo {
+    width: 20px;
+    height: 20px;
+}
+
+/* Modal de añadir competición */
+.modal-competicion {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+
+.modal-competicion.hidden {
+    display: none;
+}
+
+.modal-competicion-content {
+    background: var(--color-white);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-2xl);
+    max-width: 500px;
+    width: 90%;
+    box-shadow: var(--shadow-lg);
+}
+
+.modal-competicion-title {
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    color: var(--color-gray-900);
+    margin-bottom: var(--spacing-xl);
+    text-align: center;
+}
+
+.modal-form-group {
+    margin-bottom: var(--spacing-lg);
+}
+
+.modal-form-group label {
+    display: block;
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    color: var(--color-gray-700);
+    margin-bottom: var(--spacing-sm);
+}
+
+.modal-form-group input[type="text"] {
+    width: 100%;
+    padding: var(--spacing-md);
+    border: 2px solid var(--color-gray-200);
+    border-radius: var(--border-radius);
+    font-size: var(--font-size-base);
+    background: var(--color-white);
+    transition: var(--transition);
+}
+
+.modal-form-group input:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.1);
+}
+
+/* Subida de logo de competición */
+.competition-logo-upload {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-lg);
+    border: 2px dashed var(--color-gray-300);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+    background: var(--color-gray-50);
+}
+
+.competition-logo-upload:hover {
+    border-color: var(--color-accent);
+    background: rgba(49, 130, 206, 0.05);
+}
+
+.competition-logo-upload input[type="file"] {
+    display: none;
+}
+
+.competition-logo-preview {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    border-radius: var(--border-radius);
+    border: var(--border-width) solid var(--color-gray-200);
+}
+
+.upload-placeholder {
+    width: 40px;
+    height: 40px;
+    background: var(--color-gray-200);
+    border-radius: var(--border-radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-gray-400);
+}
+
+.upload-text {
+    flex: 1;
+    color: var(--color-gray-600);
+    font-size: var(--font-size-sm);
+}
+
+/* Acciones del modal */
+.modal-actions {
+    display: flex;
+    gap: var(--spacing-md);
+    justify-content: flex-end;
+    margin-top: var(--spacing-xl);
+    padding-top: var(--spacing-lg);
+    border-top: var(--border-width) solid var(--color-gray-200);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .custom-select-options {
+        max-height: 200px;
+    }
+    
+    .custom-select-option {
+        padding: var(--spacing-sm) var(--spacing-md);
+    }
+    
+    .competition-logo {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .modal-competicion-content {
+        padding: var(--spacing-xl);
+        margin: var(--spacing-md);
+    }
+    
+    .modal-actions {
+        flex-direction: column;
+    }
+    
+    .modal-actions button {
+        width: 100%;
+    }
+}
+
+/* Animaciones */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.custom-select.open .custom-select-options {
+    animation: slideDown 0.2s ease-out;
+}
+
+/* Scrollbar personalizado para opciones */
+.custom-select-options::-webkit-scrollbar {
+    width: 6px;
+}
+
+.custom-select-options::-webkit-scrollbar-track {
+    background: var(--color-gray-100);
+    border-radius: 3px;
+}
+
+.custom-select-options::-webkit-scrollbar-thumb {
+    background: var(--color-gray-300);
+    border-radius: 3px;
+}
+
+.custom-select-options::-webkit-scrollbar-thumb:hover {
+    background: var(--color-gray-400);
+}
+

@@ -1,0 +1,222 @@
+/* ===== ESTILOS DRAG & DROP ===== */
+
+/* Jugadores disponibles */
+.jugador-disponible {
+    background: var(--color-white);
+    border: var(--border-width) solid var(--color-gray-200);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-md);
+    text-align: center;
+    cursor: grab;
+    transition: var(--transition);
+    user-select: none;
+    min-width: 100px;
+}
+
+.jugador-disponible:hover {
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+.jugador-disponible.dragging {
+    opacity: 0.5;
+    transform: rotate(5deg);
+    cursor: grabbing;
+}
+
+.jugador-disponible.seleccionado {
+    background: var(--color-gray-100);
+    border-color: var(--color-accent);
+    opacity: 0.7;
+}
+
+.jugador-foto {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: var(--spacing-sm);
+    border: 2px solid var(--color-gray-200);
+}
+
+.jugador-nombre {
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    color: var(--color-gray-900);
+    line-height: 1.2;
+}
+
+/* Posiciones en el campo */
+.posicion-jugador {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid var(--color-gray-400);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    color: var(--color-gray-700);
+    cursor: pointer;
+    transition: var(--transition);
+    user-select: none;
+    backdrop-filter: blur(4px);
+}
+
+.posicion-jugador:hover {
+    background: rgba(255, 255, 255, 1);
+    border-color: var(--color-accent);
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+.posicion-jugador.ocupada {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: var(--color-white);
+    font-weight: 700;
+}
+
+.posicion-jugador.ocupada:hover {
+    background: #2c5aa0;
+    border-color: #2c5aa0;
+}
+
+.posicion-jugador.drag-over {
+    background: rgba(49, 130, 206, 0.2);
+    border-color: var(--color-accent);
+    border-width: 3px;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+}
+
+/* Grid de jugadores disponibles */
+.jugadores-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: var(--spacing-md);
+    max-height: 300px;
+    overflow-y: auto;
+    padding: var(--spacing-sm);
+    border: var(--border-width) solid var(--color-gray-200);
+    border-radius: var(--border-radius);
+    background: var(--color-gray-50);
+}
+
+/* Lista de suplentes */
+.suplentes-list {
+    max-height: 200px;
+    overflow-y: auto;
+    border: var(--border-width) solid var(--color-gray-200);
+    border-radius: var(--border-radius);
+    background: var(--color-white);
+}
+
+.suplente-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+    border-bottom: var(--border-width) solid var(--color-gray-100);
+    transition: var(--transition);
+}
+
+.suplente-item:last-child {
+    border-bottom: none;
+}
+
+.suplente-item:hover {
+    background: var(--color-gray-50);
+}
+
+.suplente-checkbox {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--color-accent);
+}
+
+.suplente-item .jugador-foto {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 0;
+}
+
+.jugador-info {
+    flex: 1;
+}
+
+.jugador-info .jugador-nombre {
+    margin-bottom: var(--spacing-xs);
+}
+
+.jugador-posicion {
+    font-size: var(--font-size-xs);
+    color: var(--color-gray-500);
+}
+
+/* Layout de selección de jugadores */
+.jugadores-layout {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: var(--spacing-xl);
+    align-items: start;
+}
+
+.campo-container {
+    display: flex;
+    justify-content: center;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .jugadores-layout {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+    }
+    
+    .campo-container {
+        order: 2;
+    }
+    
+    .formacion-selector {
+        order: 1;
+    }
+    
+    .jugadores-disponibles {
+        order: 3;
+    }
+}
+
+@media (max-width: 768px) {
+    .jugadores-grid {
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+        gap: var(--spacing-sm);
+    }
+    
+    .jugador-disponible {
+        padding: var(--spacing-sm);
+    }
+    
+    .jugador-foto {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .posicion-jugador {
+        width: 50px;
+        height: 50px;
+        font-size: 10px;
+    }
+}
+
